@@ -15,12 +15,18 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/populatedb", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/populatedb", {
+  useNewUrlParser: true,
+});
 
 db.Workout.create({ name: "Workout" })
-  .then(dbUser => {
+  .then((dbUser) => {
     console.log(dbUser);
   })
   .catch(({ message }) => {
     console.log(message);
   });
+
+app.post("/api/workouts", (req, res) => {
+  db.Workout.create({}).then((data) => res.json(data));
+});
