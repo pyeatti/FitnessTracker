@@ -28,8 +28,9 @@ module.exports = function (app) {
         res.json(err);
       });
   });
+
   // GET STATS
-  app.get("/api/stats", (req, res) => {
+  app.get("/api/workouts/range", (req, res) => {
     Workout.find()
       .then((data) => res.json(data))
       .catch((err) => {
